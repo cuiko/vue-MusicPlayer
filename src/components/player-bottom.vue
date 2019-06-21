@@ -103,7 +103,7 @@ export default {
 }
 .music-name {
   width: 80%;
-  font-size: 6vw;
+  font-size: 5vw;
   display: flex;
   align-items: center;
 }

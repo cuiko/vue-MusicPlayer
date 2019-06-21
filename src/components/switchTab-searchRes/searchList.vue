@@ -82,6 +82,14 @@ export default {
 };
 </script>
 <style scoped>
+.isFixed-tab {
+  position: fixed !important;
+  top: 0 !important;
+}
+.isFixed-res {
+  margin-top: 8vw !important;
+}
+
 #search-list {
   width: var(--rootWidth);
   position: absolute;
@@ -90,12 +98,5 @@ export default {
 }
 #search-list > div {
   transition: none;
-}
-.isFixed-tab {
-  position: fixed !important;
-  top: 0 !important;
-}
-.isFixed-res {
-  margin-top: 8vw !important;
 }
 </style>

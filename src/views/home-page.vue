@@ -23,7 +23,7 @@ export default {
       isShowIndexNav: true
     }
   },
-  mounted() {
+  created() {
     let vm = this;
     
     vm.$on("showList", function(boolean) {
@@ -44,11 +44,9 @@ export default {
 
 #home-page {
   width: 100%;
-  height: 100%;
   max-width: var(--rootWidth);
   min-height: 100%;
   z-index: var(--subpageZindex);
-  overflow-x: hidden;
   position: absolute;
   top: 0;
 }

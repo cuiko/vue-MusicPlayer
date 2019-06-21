@@ -118,7 +118,7 @@ export default {
       this.bus.$emit("showActionSheet-musicInfo", true, item);
     }
   },
-  mounted() {
+  created() {
     let vm = this;
     
     http
@@ -158,7 +158,6 @@ export default {
   max-width: var(--rootWidth);
   min-height: 100%;
   z-index: var(--subpageZindex);
-  overflow-x: hidden;
   position: absolute;
   top: 0;
   color: #fff;

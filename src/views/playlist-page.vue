@@ -3,7 +3,7 @@
     <div class="playlist-info">
       <blur-img :width="'100%'" :height="'100%'" :cover-img="data.coverImgUrl"></blur-img>
       <div class="info-content">
-        <div class="info-top">
+        <div class="info-top" ref="headerBar">
           <blur-img :width="'100%'" :height="'200px'" :cover-img="data.coverImgUrl"></blur-img>
           <div class="back-content">
             <div class="back-icon" @click="goBack">
@@ -72,7 +72,7 @@
       </div>
     </div>
     <div class="playlist-list">
-      <div class="list-top">
+      <div class="list-top" :class="{ 'isFixed-playAll': isFixed }">
         <div class="list-top__left">
           <img src="@/assets/play2&black2c2c2c&32x32.png" width="22px" height="22px">
           <span @click="requestSongApi({ id:data.tracks[0].id, playList:[].concat(data.tracks) });">
@@ -85,7 +85,7 @@
           <span>收藏(<number :num="data.subscribedCount"></number>)</span>
         </div>
       </div>
-      <ul class="list-content" ref="list">
+      <ul class="list-content" ref="playAll" :class="{ 'isFixed-list': isFixed }">
         <li class="song-block" v-for="(item, index) in data.tracks" :key="item.id">
           <div v-if="item.id == currentSongId" class="song-index">
             <img src="@/assets/playing&d81e06&64x64.png" width="26px" height="26px">
@@ -130,6 +130,7 @@ export default {
   data() {
     return {
       isReady: false,
+      isFixed: false,
       data: {}
     };
   },
@@ -148,7 +149,7 @@ export default {
       this.bus.$emit("showActionSheet-musicInfo", true, item);
     }
   },
-  mounted() {
+  created() {
     let vm = this;
     
     http
@@ -159,6 +160,10 @@ export default {
         vm.isReady = true;
         vm.data = res.data.playlist;
       });
+    // 滚动固定
+    window.onscroll = function() {
+      vm.isFixed = Math.floor(vm.$refs.playAll.getBoundingClientRect().top) <= Math.floor(vm.$refs.headerBar.offsetHeight);
+    };
   },
   destroyed() {
     window.onscroll = null;
@@ -166,18 +171,25 @@ export default {
 };
 </script>
 <style scoped>
+.isFixed-playAll {
+  position: fixed !important;
+  top: var(--barHeight) !important;
+}
+.isFixed-list {
+  /* padding-top: var(--barHeight) !important; */
+}
+
 #playlist-page {
   --remarkColor: #aaa;
   --barHeight: 10vw;
   --savePadding: 5%;
 
   width: 100%;
-  height: 100%;
   max-width: var(--rootWidth);
   min-height: 100%;
   z-index: var(--subpageZindex);
-  overflow-x: hidden;
   position: absolute;
+  overflow-x: hidden;
   top: 0;
 }
 /* 上半部分-信息部分 start */
@@ -285,15 +297,20 @@ export default {
 
 /* 下半部分-列表部分 start */
 .playlist-list {
-  background: #fff;
-  border-radius: 7vw 7vw 0 0;
   padding-bottom: calc(var(--bottomPlayerHeight) + 1px);
   position: relative;
+  border-radius: 7vw 7vw 0 0;
   overflow: hidden;
 }
   /* 播放全部bar start */
 .list-top {
+  transition: none;
+  position: absolute;
+  top: 0;
   height: var(--barHeight);
+  border-radius: 7vw 7vw 0 0;
+  background: #fff;
+  overflow: hidden;
   padding: 0 3%;
   display: flex;
   align-items: center;
@@ -332,6 +349,8 @@ export default {
   /* 歌曲列表 start */
 .list-content {
   list-style: none;
+  background: #fff;
+  padding-top: var(--barHeight);
 }
 .song-block {
   height: 12vw;
