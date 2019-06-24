@@ -77,6 +77,7 @@ export default {
 }
 .rank-content > li {
   width: 100%;
+  font-size: 3vw;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;

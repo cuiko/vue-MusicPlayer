@@ -62,6 +62,7 @@ export default {
 }
 .tab-block {
   flex: 0 0 auto;
+  font-size: 3vw;
   width: auto;
   box-sizing: border-box;
   height: 100%;
