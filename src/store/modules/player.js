@@ -45,99 +45,51 @@ const state = {
 
 const getters = {
   // 获取播放状态
-  isPlay(state) {
-    return state.playing;
-  },
+  isPlay: state => state.playing,
   // 获取播放器元素
-  getAudioElement(state) {
-    return document.getElementById(state.audioElementId);
-  },
+  getAudioElement: state => document.getElementById(state.audioElementId),
   // 获取元素id名称 用于设置播放器id
-  getAudioElementId(state) {
-    return state.audioElementId;
-  },
+  getAudioElementId: state => state.audioElementId,
   // 获取上一首歌曲id
-  getSongPrevId(state) {
-    return state.prevId;
-  },
+  getSongPrevId: state => state.prevId,
   // 获取当前可用的播放模式 [列表循环, 单曲循环, 随机播放]
-  getPlayModels(state) {
-    return state.playModels;
-  },
+  getPlayModels: state => state.playModels,
   // 获取当前播放模式
-  getCurrentPlayModel(state) {
-    return state.currentPlayModel;
-  },
+  getCurrentPlayModel: state => state.currentPlayModel,
   // 获取暂停时，延时暂停的时间
-  getPauseDelay(state) {
-    return state.pauseDelay;
-  },
+  getPauseDelay: state => state.pauseDelay,
   // 获取歌曲信息 ——start——
-  getSongUrl(state) {
-    return state.song.url;
-  },
-  getSongCover(state) {
-    return state.song.coverImg;
-  },
-  getSongName(state) {
-    return state.song.songName;
-  },
-  getSongSonger(state) {
-    return state.song.songer;
-  },
-  getSongId(state) {
-    return state.song.id;
-  },
+  getSongUrl: state => state.song.url,
+  getSongCover: state => state.song.coverImg,
+  getSongName: state => state.song.songName,
+  getSongSonger: state => state.song.songer,
+  getSongId: state => state.song.id,
   // 在请求数据时，已格式化
-  getDuration(state) {
-    return state.song.duration;
-  },
+  getDuration: state => state.song.duration,
   // 在请求数据时，已除以1000
-  getDuration_raw(state) {
-    return state.song.duration_raw;
-  },
+  getDuration_raw: state => state.song.duration_raw,
   // 歌曲信息 ——end——
   // 获取播放列表
-  getPlayList(state) {
-    return state.playList;
-  },
+  getPlayList: state => state.playList,
   // 播放列表的id列表
-  getPlayListIds(state) {
-    return state.playListIds;
-  },
+  getPlayListIds: state => state.playListIds,
   // 进度条相关 ——start——
   // 当前播放时间
-  getCurrentTime(state) {
-    return state.currentTime;
-  },
+  getCurrentTime: state => state.currentTime,
   // 当前播放时间进过格式化 毫秒转 00:00
-  getCurrentTime_format(state) {
-    return tools.formatMinute(state.currentTime);
-  },
+  getCurrentTime_format: state => tools.formatMinute(state.currentTime),
   // 当前时间 / 当前歌曲时长的比值 用于已播放的元素宽度改变
-  getCurrentTime_per(state) {
-    return (state.currentTime / (state.song.duration_raw || 1)).toFixed(3);
-  },
+  getCurrentTime_per: state => (state.currentTime / (state.song.duration_raw || 1)).toFixed(3),
   // 是否触摸进度条
-  isTouch(state) {
-    return state.isTouch;
-  },
+  isTouch: state => state.isTouch,
   // 获取拖动改变的时间
-  getChangingTime(state) {
-    return state.changingTime;
-  },
+  getChangingTime: state => state.changingTime,
   // 获取拖动改变的时间格式化
-  getChangingTime_format(state) {
-    return tools.formatMinute(state.changingTime);
-  },
+  getChangingTime_format: state => tools.formatMinute(state.changingTime),
   // 获取拖动改变的时间的百分比
-  getChangingTime_per(state) {
-    return state.changingTime_per;
-  },
+  getChangingTime_per: state => state.changingTime_per,
   // 获取进度条id
-  getProgressBarId(state) {
-    return state.progressBarId;
-  }
+  getProgressBarId: state => state.progressBarId
   // 进度条 ——end——
 };
 
