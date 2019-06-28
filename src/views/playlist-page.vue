@@ -34,6 +34,7 @@
               <img src="@/assets/right&fff&64x64.png" width="16px" height="16px">
             </div>
             <div class="playlist-description">
+            <!-- <div class="playlist-description" @click="isShowCoverDescription = !isShowCoverDescription"> -->
               <span class="playlists-nickname">{{ data.description }}</span>
               <img src="@/assets/right&fff&64x64.png" width="16px" height="16px">
             </div>
@@ -108,6 +109,12 @@
         </li>
       </ul>
     </div>
+    <cover-description v-if="isShowCoverDescription"
+      :tags="data.tags"
+      :cover-img="data.coverImgUrl"
+      :description="data.description"
+      :title="data.name"
+    ></cover-description>
   </div>
 </template>
 <script>
@@ -119,18 +126,21 @@ import tools from "@/utils/tools";
 import number from "@/components/number";
 import BlurImg from "@/components/blurImg";
 import CoverList from "@/components/cover-list";
+import CoverDescription from "@/components/cover-description";
 
 export default {
   name: "playlist-page",
   components: {
     "blur-img": BlurImg,
     "cover-list": CoverList,
+    "cover-description": CoverDescription,
     number
   },
   data() {
     return {
       isReady: false,
       isFixed: false,
+      isShowCoverDescription: false,
       data: {}
     };
   },
@@ -151,7 +161,7 @@ export default {
   },
   created() {
     let vm = this;
-    
+    console.log(vm.$route.params.id);
     http
       .fetchGet("playlist/detail", {
         id: vm.$route.params.id
