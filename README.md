@@ -17,7 +17,7 @@
 ##### 2、滑屏切换
 
 ## 食用方法
-#### 1、数据拉取基于**网易云音乐 NodeJS 版 API**
+#### 1、数据拉取基于 ***网易云音乐 NodeJS 版 API***
 ```
 https://github.com/Binaryify/NeteaseCloudMusicApi
 ```
@@ -26,7 +26,7 @@ https://github.com/Binaryify/NeteaseCloudMusicApi
 npm run start
 ```
 
-#### 本项目根目录打开cmd,输入
+#### 3、本项目根目录打开cmd，输入
 ```
 npm run dev
 ```
