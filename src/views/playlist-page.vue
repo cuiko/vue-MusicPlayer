@@ -161,7 +161,7 @@ export default {
   },
   created() {
     let vm = this;
-    console.log(vm.$route.params.id);
+    
     http
       .fetchGet("playlist/detail", {
         id: vm.$route.params.id
@@ -173,7 +173,6 @@ export default {
     // 滚动固定
     window.onscroll = function() {
       vm.isFixed = Math.floor(vm.$refs.playAll.getBoundingClientRect().top) <= Math.floor(vm.$refs.headerBar.offsetHeight);
-      console.log(vm.isFixed, vm.$refs.playAll.getBoundingClientRect().top, vm.$refs.headerBar.offsetHeight);
     };
   },
   destroyed() {

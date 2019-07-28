@@ -2,14 +2,15 @@
   <div id="search">
     <div class="search">
       <div class="search-input">
-        <img src="@/assets/search&8a8a8a&128x128.png" alt="search" width="30px" height="30px">
+        <img src="@/assets/search&8a8a8a&128x128.png" alt="search" width="30px" height="30px" icon="search">
         <input
           type="text"
           placeholder="搜索 歌曲/专辑/歌手"
           @focus="focus"
           v-model="inputValue"
-          @keyup.enter="add2HistoryList(inputValue); toSearchResPage(inputValue)"
+          @keyup.enter="keywordsCheck(inputValue)"
         >
+        <img src="@/assets/close2&bfbfbf&128x128.png" alt="close" width="26px" height="26px" icon="close" v-if="isShowClose" @click="emptyInputValue">
       </div>
       <div
         class="cancel"
@@ -30,7 +31,7 @@
           class="hotkey-item"
           v-for="(key, index) in hotkey"
           :key="index"
-          @click="add2HistoryList(key.first); toSearchResPage(key.first)"
+          @click="keywordsCheck(key.first);"
         >
           <span>{{ index + 1 }}.&nbsp;{{ key.first }}&nbsp;</span>
           <img v-if="key.iconType == 1" src="@/assets/hot&d81e06&16x16.png">
@@ -56,10 +57,11 @@ export default {
   },
   data() {
     return {
+      isShowClose: false,
       isCancel: false,
       isShowHotkey: false,
       isShowSearch: false,
-      inputValue: null,
+      inputValue: "",
       hotkey: [],
       storageName: "searchHistory",
       historyList: []
@@ -69,7 +71,8 @@ export default {
     cancel() {
       this.$parent.$emit("showList", true);
 
-      this.inputValue = null;
+      this.inputValue = "";
+      this.isShowClose = false;
       this.isCancel = false;
       this.isShowHotkey = false;
       this.isShowSearch = false;
@@ -77,12 +80,16 @@ export default {
     showSearch() {
       this.$parent.$emit("showList", false);
 
+      this.isShowClose = false;
       this.isCancel = true;
       this.isShowHotkey = false;
       this.isShowSearch = true;
     },
     emptyHistory() {
       this.historyList = [];
+    },
+    emptyInputValue() {
+      this.inputValue = "";
     },
     focus() {
       if (this.isShowHotkey) {
@@ -94,6 +101,7 @@ export default {
 
       this.$parent.$emit("showList", false);
 
+      this.isShowClose = true;
       this.isCancel = true;
       this.isShowHotkey = true;
       this.isShowSearch = false;
@@ -102,10 +110,18 @@ export default {
       this.searchKey = keywords;
       this.showSearch();
     },
-    add2HistoryList(item) {
+    add2HistoryList(keywords) {
       let arr = this.historyList;
-      arr.push(item);
+      arr.push(keywords);
       this.historyList = Array.from(new Set(arr));
+    },
+    keywordsCheck(keywords) {
+      if(/[^\s]/.test(keywords)) {
+        this.toSearchResPage(keywords);
+        this.add2HistoryList(keywords);
+      } else {
+        this.bus.$emit("showToast", true, "搜索内容错误");
+      }
     }
   },
   created() {
@@ -145,7 +161,7 @@ export default {
   width: 100%;
   margin: 10px;
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
   background: #eee;
   border-radius: 5px;

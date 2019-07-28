@@ -5,6 +5,7 @@
 ##### 页面级：歌曲搜索，结果显示，歌单列表
 ##### 功能级：歌曲控制（包括：进度条控制，歌曲切换，歌曲播放暂停），歌单控制（包括：播放列表内歌曲的删除，添加）
 ##### 歌曲，歌单都用vuex控制
+##### 使用webpack进行调试和打包
 
 ## 已知bug
 ##### 1、移动端在可滚动内容中的元素使用fixed定位导致滚动时，fixed定位的元素不会跟着一起移动，而是滚动结束后才归位，已修复，已更改为absolute
@@ -15,30 +16,18 @@
 ##### 1、歌词显示
 ##### 2、滑屏切换
 
-## Project setup
+## 食用方法
+#### 1、数据拉取基于**网易云音乐 NodeJS 版 API**
 ```
-npm install
+https://github.com/Binaryify/NeteaseCloudMusicApi
 ```
-
-### Compiles and hot-reloads for development
+#### 2、网易云音乐api根目录打开cmd，输入
 ```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
+npm run start
 ```
 
-### Run your tests
+#### 本项目根目录打开cmd,输入
 ```
-npm run test
+npm run dev
 ```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+##### P.s 如果浏览器可以选择兼容模式和极速模式，请选择极速模式
