@@ -1,5 +1,6 @@
 var path = require("path");
 var webpack = require("webpack");
+var HtmlWebpackPlugin = require("html-webpack-plugin");
 var TerserPlugin = require("terser-webpack-plugin");
 var VueLoaderPlugin = require("vue-loader/lib/plugin");
 
@@ -15,7 +16,7 @@ module.exports = {
     historyApiFallback: true,
     overlay: true,
     inline: true,
-    contentBase: "./public",
+    contentBase: "./dist",
     port: process.env.PORT || 8080,
     host: "localhost",
     open: true
@@ -27,7 +28,16 @@ module.exports = {
       "@": path.resolve("./src")
     }
   },
-  plugins: [new VueLoaderPlugin()],
+  plugins: [
+    new VueLoaderPlugin(),
+    new HtmlWebpackPlugin({
+      template: "./public/index.html",
+      favicon: "./public/favicon.ico",
+      filename: "index.html",
+      title: "vue music",
+      inject: true
+    })
+  ],
   module: {
     rules: [
       {
