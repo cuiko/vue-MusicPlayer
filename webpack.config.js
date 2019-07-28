@@ -35,7 +35,11 @@ module.exports = {
       favicon: "./public/favicon.ico",
       filename: "index.html",
       title: "vue music",
-      inject: true
+      inject: true,
+      minify: {
+        removeComments: true,
+        collapseWhitespace: true
+      }
     })
   ],
   module: {
