@@ -8,7 +8,7 @@ module.exports = {
   entry: ["babel-polyfill", "./src/main.js"],
   output: {
     path: path.resolve(__dirname, "./dist/"),
-    publicPath: "/dist/",
+    publicPath: "/dist/", //打包文件的根目录
     filename: "js/bundle.js"
   },
   devtool: "eval-source-map",
@@ -16,7 +16,8 @@ module.exports = {
     historyApiFallback: true,
     overlay: true,
     inline: true,
-    contentBase: "./dist",
+    contentBase: "./dist",  //index入口设置
+    publicPath: "/dist/", //静态文件路径 index.html等静态模板
     port: process.env.PORT || 8080,
     host: "localhost",
     open: true
@@ -37,7 +38,9 @@ module.exports = {
       title: "vue music",
       inject: true,
       minify: {
+        // 删除注释
         removeComments: true,
+        // 删除空格
         collapseWhitespace: true
       }
     })

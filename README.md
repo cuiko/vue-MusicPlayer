@@ -21,13 +21,16 @@
 ```
 https://github.com/Binaryify/NeteaseCloudMusicApi
 ```
-#### 2、网易云音乐api根目录打开cmd，输入
+#### 2、网易云音乐api根目录打开cmd，依次输入
 ```
+npm install
 npm run start
 ```
 
-#### 3、本项目根目录打开cmd，输入
+#### 3、本项目根目录打开cmd，依次输入
 ```
+npm install
+npm run build
 npm run dev
 ```
 ##### P.s 如果浏览器可以选择兼容模式和极速模式，请选择极速模式
